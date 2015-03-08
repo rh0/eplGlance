@@ -9,6 +9,12 @@
  */
 angular.module('eplGlanceApp')
   .controller('MainCtrl', function ($scope, footballData) {
-    $scope.fbData = footballData.get();
-    console.log($scope);
+    footballData.season('leagueTable').get().$promise.then(function(data) {
+      $scope.fbData = data;
+      for(var i = 0; i < $scope.fbData.standing.length; i++) {
+        var teamId = $scope.fbData.standing[i]._links.team.href;
+        $scope.fbData.standing[i].teamId = teamId.split('/').pop();
+      }
+      console.log($scope.fbData);
+    });
   });

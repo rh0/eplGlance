@@ -1,32 +1,27 @@
 <div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+    <img src="https://upload.wikimedia.org/wikipedia/en/5/5a/Premier_League.svg" class="img-responsive center-block" alt="English Premier League"><br>
 </div>
 <div class="panel panel-default">
-  <div class="panel-heading">{{fbData.leagueCaption}}</div>
+  <div class="panel-heading">{{fbData.leagueCaption}} Standings</div>
   <div class="panel-body">
     <table class="table table-striped table-responsive">
       <tr>
         <th></th>
         <th>Team</th>
-        <th>Games</th>
         <th>Pts</th>
         <th>G</th>
         <th>GA</th>
         <th>GD</th>
+        <th>#</th>
       </tr>
       <tr ng-repeat="team in fbData.standing">
         <td>{{team.position}}</td>
-        <td>{{team.teamName}}</td>
-        <td>{{team.playedGames}}</td>
+        <td><a href="/team/{{team.teamId}}">{{team.teamName}}</a></td>
         <td>{{team.points}}</td>
         <td>{{team.goals}}</td>
         <td>{{team.goalsAgainst}}</td>
         <td>{{team.goalDifference}}</td>
+        <td>{{team.playedGames}}</td>
       </tr>
     </table>
   </div>
