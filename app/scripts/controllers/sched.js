@@ -16,10 +16,14 @@ angular.module('eplGlanceApp')
       var fixtures = [];
       var fixtureIndex = -1;
       var dateIndex = -1;
+      var timeIndex = -1;
       var matchDay;
       var gameDate;
+      var gameTime;
 
       for(var i=0; i<data.fixtures.length; i++) {
+        var gameDateObj = new Date(data.fixtures[i].date);
+
         if(matchDay !== data.fixtures[i].matchday) {
           matchDay = data.fixtures[i].matchday;
           fixtures.push({
@@ -27,21 +31,32 @@ angular.module('eplGlanceApp')
             dates: []
           });
           fixtureIndex++;
-          // Reset dateIndex when we move to new matchDay.
+          // Reset date/time Index when we move to new matchDay.
           dateIndex = -1;
+          timeIndex = -1;
         }
 
-        if(gameDate !== data.fixtures[i].date) {
-          gameDate = data.fixtures[i].date;
-          var gameDateObj = new Date(gameDate);
+        if(gameDate !== gameDateObj.toLocaleDateString()) {
+          gameDate = gameDateObj.toLocaleDateString();
           fixtures[fixtureIndex].dates.push({
-            date: gameDateObj.toLocaleString(),
-            games: []
+            date: gameDateObj.toISOString(),
+            timezone: gameDateObj.getTimezoneOffset(),
+            times: []
           });
           dateIndex++;
         }
 
-        fixtures[fixtureIndex].dates[dateIndex].games.push({
+        if(gameTime !== gameDateObj.toLocaleTimeString()) {
+          gameTime = gameDateObj.toLocaleTimeString();
+          fixtures[fixtureIndex].dates[dateIndex].times.push({
+            date: gameDateObj.toISOString(),
+            timezone: gameDateObj.getTimezoneOffset(),
+            games: []
+          });
+          timeIndex++;
+        }
+
+        fixtures[fixtureIndex].dates[dateIndex].times[timeIndex].games.push({
           date: data.fixtures[i].date,
           homeName: data.fixtures[i].homeTeamName,
           homeId: data.fixtures[i]._links.homeTeam.href.split('/').pop(),

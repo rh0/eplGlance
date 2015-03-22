@@ -13,19 +13,22 @@
     <h2>Matchday {{fixture.matchDay}}</h2>
   </div>
   <div class="panel-body">
-    <div class="well" ng-repeat="day in fixture.dates">
-      <h4>{{day.date}}</h4>
-      <div class="row">
-        <div class="col-xs-12 col-sm-6 match-info" ng-repeat="game in day.games">
-          <div class="thumbnail">
-            <div class="caption">
-              <div class="home-team">
-                <a href="#/team/{{game.homeId}}">{{game.homeName}}
-                  <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                </a>
-              </div>
-              <div class="away-team">
-                <a href="#/team/{{game.awayId}}">{{game.awayName}}</a>
+    <div class="date-wrapper" ng-repeat="gameDay in fixture.dates">
+      <h3>{{gameDay.date | date:'EEEE, MMMM d, yyyy'}}</h3>
+      <div class="well" ng-repeat="gameTime in gameDay.times">
+        <h4>{{gameTime.date | date:'h:mm a'}}</h4>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 match-info" ng-repeat="game in gameTime.games">
+            <div class="thumbnail">
+              <div class="caption">
+                <div class="home-team">
+                  <a href="#/team/{{game.homeId}}">{{game.homeName}}
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                  </a>
+                </div>
+                <div class="away-team">
+                  <a href="#/team/{{game.awayId}}">{{game.awayName}}</a>
+                </div>
               </div>
             </div>
           </div>
