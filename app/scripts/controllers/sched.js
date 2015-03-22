@@ -12,13 +12,13 @@ angular.module('eplGlanceApp')
     $scope.leagueSeason = season;
     footballData.season('fixtures').get({ timeFrame: 'n14' }).$promise.then(function(data) {
       // We're about to get loopy. Helper variables for this.
+      // This could all probably go in a service.
       var fixtures = [];
       var fixtureIndex = -1;
       var dateIndex = -1;
       var matchDay;
       var gameDate;
 
-      console.log(data);
       for(var i=0; i<data.fixtures.length; i++) {
         if(matchDay !== data.fixtures[i].matchday) {
           matchDay = data.fixtures[i].matchday;
@@ -33,8 +33,9 @@ angular.module('eplGlanceApp')
 
         if(gameDate !== data.fixtures[i].date) {
           gameDate = data.fixtures[i].date;
+          var gameDateObj = new Date(gameDate);
           fixtures[fixtureIndex].dates.push({
-            date: gameDate,
+            date: gameDateObj.toLocaleString(),
             games: []
           });
           dateIndex++;
@@ -51,7 +52,6 @@ angular.module('eplGlanceApp')
         });
       }
 
-      console.log(fixtures);
       $scope.fixtures = fixtures;
     });
   });
