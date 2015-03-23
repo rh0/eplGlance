@@ -44,6 +44,7 @@ angular.module('eplGlanceApp')
             times: []
           });
           dateIndex++;
+          // Reset the time index.
           timeIndex = -1;
         }
 
