@@ -44,6 +44,7 @@ angular.module('eplGlanceApp')
             times: []
           });
           dateIndex++;
+          timeIndex = -1;
         }
 
         if(gameTime !== gameDateObj.toLocaleTimeString()) {
