@@ -8,5 +8,5 @@
  * Constant in the eplGlanceApp.
  */
 angular.module('eplGlanceApp')
-  .constant('league', 354)
+  .constant('league', 398)
   .constant('season', '2015 / 2016');
