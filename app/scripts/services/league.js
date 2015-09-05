@@ -9,4 +9,4 @@
  */
 angular.module('eplGlanceApp')
   .constant('league', 354)
-  .constant('season', '2014 / 2015');
+  .constant('season', '2015 / 2016');
